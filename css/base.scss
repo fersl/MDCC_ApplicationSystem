@@ -1,0 +1,27 @@
+$gray: #e6e6e6;
+$bg: #fcfcfc;
+$orange: #ff7800;
+$light_blue: #489bd9;
+$dark_blue: #002b68;
+
+body {
+    background-color: $bg;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: $gray;
+    padding: 1%;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+    margin-bottom: 3%;
+
+}
+
+#logo, #title {
+    display: inline-block;
+}
+
+#title {
+    font-size: 3vw;
+    margin-left: 2%;
+}
