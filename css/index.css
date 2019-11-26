@@ -1,0 +1,40 @@
+#instructions {
+    background-color: #fff;
+    border: 2px solid #a2a2a2;
+    padding: 3%;
+    border-radius: 10px;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.2);
+    max-width: 992px;
+    margin: 0 auto;
+    margin-bottom: 5%;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.btn-index {
+    font-size: 26px;
+    text-align: center;
+    padding: 3% 5%;
+    box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.2), -2px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-index: hover {
+    
+}
+
+@media screen and (max-width: 425px) {
+
+    .flex-container {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        padding: 5%;
+        height: 90px;
+        width: 80%;
+        margin: auto;
+    }
+}

@@ -10,7 +10,7 @@ body {
 }
 
 header {
-    background-color: $gray;
+    background-color: whitesmoke;
     padding: 1%;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
     margin-bottom: 3%;
@@ -24,4 +24,30 @@ header {
 #title {
     font-size: 3vw;
     margin-left: 2%;
+}
+
+.container {
+    max-width: 992px;
+    margin: auto;
+    padding: 0% 3%;
+}
+
+.btn {
+    background-color: $light_blue;
+    padding: 1%;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+}
+
+@media screen and (max-width: 425px) {
+    #logo {
+        display: none;
+    }
+    
+    #title {
+        display: block;
+        font-size: 20px;
+        margin: 3%;
+    }
 }
