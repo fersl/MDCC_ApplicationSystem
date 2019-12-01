@@ -7,6 +7,10 @@
     margin-bottom: 5%;
 }
 
+.form-end {
+    margin-bottom: 5%;
+}
+
 .section-header {
     display: block;
     color: white;
@@ -22,4 +26,15 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
+}
+
+.btn {
+    margin-left: 1%;
+    font-size: 20px;
+}
+
+.modal-btn {
+    border: none;
+    margin: none;
+    padding: none;
 }

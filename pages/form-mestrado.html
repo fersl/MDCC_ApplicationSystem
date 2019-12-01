@@ -25,12 +25,14 @@
                 <h3 class="section-header">Dados Pessoais:</h3>
                 
                 <div class="section-content form-row">
-                    <div class="col">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="nome">Nome Completo:</label>
                             <input type="text" 
                                     class="form-control" 
-                                    name="name" 
+                                    name="name"
+                                    id="name"
+                                    v-model="form.name" 
                                     required>
                         </div>
 
@@ -40,12 +42,14 @@
                                 <input type="date" 
                                         name="birthdate" 
                                         class="form-control"
+                                        id="birthdate"
+                                        v-model="form.birthdate"
                                         required>
                             </div>
     
                             <div class="form-group form-check">
                                 <label for="gender">Gênero:</label><br>
-                                <div class="form-check form-check-inline">
+                                <div class="form-check form-check-inline" id="gender" v-model="form.gender">
                                     <input type="radio" name="gender" value="male" class="form-check-input" checked>
                                     <label for="gender" class="form-check-label"> Masculino </label>
                                 </div>
@@ -59,11 +63,16 @@
                         <div class="form-group">
                             <label for="">Documento de Identificação:</label>
                             <div class="form-row">
-                                <select name="id-document" class="custom-select col">
+                                <select name="id-document" class="custom-select col-4" id="id-document" v-model="form.id_type">
                                     <option value="cpf">CPF</option>
                                     <option value="passport">Passaporte</option>
                                 </select>
-                                <input type="number" name="id-value" class="form-control col-8" required>
+                                <input type="number"
+                                        name="id-value" 
+                                        class="form-control col-8"
+                                        id="id-value" 
+                                        v-model.number="form.id_value"
+                                        required>
                             </div>
                         </div>
 
@@ -71,7 +80,9 @@
                             <label for="nationality">Nacionalidade:</label>
                             <input type="text" 
                                     name="nationality" 
-                                    class="form-control" 
+                                    class="form-control"
+                                    id="nationality"
+                                    v-model="form.nationality" 
                                     required>
                         </div>
 
@@ -79,7 +90,9 @@
                             <label for="email">E-mail:</label>
                             <input type="email" 
                                     name="email" 
-                                    class="form-control" 
+                                    class="form-control"
+                                    id="email"
+                                    v-model="form.email" 
                                     required>
                         </div>
 
@@ -87,24 +100,40 @@
                             <label for="phone">Telefone:</label>
                             <input type="number" 
                                     name="phone" 
+                                    id="phone"
+                                    v-model.number="form.phone"
                                     class="form-control">
                         </div>
                     </div>
 
                     <!-- INFORMAÇÕES DE ENDEREÇO -->
-                    <div class="col">
+                    <div class="col-5">
                             <div class="form-group">
-                                    <label for="address">Endereço:</label>
+                                <label for="cep">CEP:</label>
+                                <input type="number" 
+                                        name="cep" 
+                                        class="form-control"
+                                        id="cep"
+                                        v-model.number="form.cep"
+                                        required>
+                            </div>
+
+                            <div class="form-group">
+                                    <label for="address">Logradouro:</label>
                                     <input type="text" 
                                             name="address" 
+                                            id="address"
+                                            v-model="form.address"
                                             class="form-control" 
                                             required>
                             </div>
 
                             <div class="form-group">
-                                <label for="address2">Complemento:</label>
+                                <label for="address-num">Complemento:</label>
                                 <input type="text" 
-                                        name="address2" 
+                                        name="address-num"
+                                        id="address-num"
+                                        v-model="form.address_num"
                                         class="form-control">
                             </div>
 
@@ -112,39 +141,38 @@
                                 <label for="nbhood">Bairro:</label>
                                 <input type="text" 
                                         name="nbhood"
+                                        id="nbhood"
                                         class="form-control"
+                                        v-model="form.nbhood"
                                         required>
                             </div>
 
-                            <div class="form-group">
-                                <label for="cep">CEP:</label>
-                                <input type="number" 
-                                        name="cep" 
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <label for="state">UF:</label>
+                                    <select name="uf" class="custom-select" v-model="form.uf">
+                                        <option v-for="uf in uf_list" :value="form.uf">{{ uf }}</option>
+                                    </select>
+                                </div>
+    
+                                <div class="form-group col-9">
+                                    <label for="city">Cidade:</label>
+                                    <input type="text" 
+                                        name="city" 
+                                        id="city"
                                         class="form-control"
+                                        v-model="form.city"
                                         required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="city">Cidade:</label>
-                                <input type="text" 
-                                    name="city" 
-                                    class="form-control"
-                                    required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="state">Estado:</label>
-                                <input type="text" 
-                                        name="state" 
-                                        class="form-control"
-                                        required>
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="country">País:</label>
                                 <input type="text" 
                                         name="country"
+                                        id="country"
                                         class="form-control"
+                                        v-model="form.country"
                                         required>
                             </div>
                     </div>
@@ -157,64 +185,127 @@
                 <h3 class="section-header">Dados de Graduação e Currículo:</h3>
 
                 <div class="section-content form-row">
-                    <div class="col">
+                    <div class="col-6">
                         <div class="form-group">
                             <label for="institution">Instituição de Ensino:</label>
                             <select name="institution"
                                     id="institution"
                                     v-model="institution"
                                     class="custom-select"/>
-                                <option v-for="institution in institutions" :value="institution">{{ institution }}</option>
+                                <option v-for="institution in institutions" :value="form.institution">{{ institution }}</option>
                             </select>
+                            <small class="form-text text-muted">Não encontra sua instituição?</small>
                             <!-- select com v-for para uma lista puxada do banco (e uma opção ao lado para cadastrar instituição) -->
                             <!-- o mesmo para curso, que deve variar de acordo com a instituição selecionada -->
                         </div>
 
                         <div class="form-group">
-                            <label for="grad">Curso:</label>
-                            <select name="course" class="custom-select">
-                                <option v-for="course in courses[institution]" :value="course">{{ course }}</option>
+                            <label for="course">Curso:</label><br>
+                            <select name="course" 
+                                    class="custom-select"
+                                    id="course"
+                                    v-model="form.course">
+                                <option v-for="course in courses[institution]" :value="form.course">{{ course }}</option>
                             </select>
+                            <small class="form-text text-muted">Não encontra seu curso?</small>
                         </div>
 
-                        <div class="form-group">
-                            <label for="period">Período:</label>
-                            <input type="number" 
-                                    name="period-start"
-                                    class="form-control"
-                                    required>
-                            até
-                            <input type="number" 
-                                    name="period-end" 
-                                    class="form-control"
-                                    required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ira">Índice de Rendimento Acadêmico:</label>
-                            <input type="number" 
-                                    name="ira"
-                                    class="form-control"
-                                    required>
+                        <div class="form-row">
+                        	<div class="form-group col-8">
+                        	    <label for="period">Período:</label>
+                        	    <div class="form-row">
+                        	        <input type="number" 
+                                            name="period-start"
+                                            id="period-start"
+                                            v-model.number="form.period_start"
+                        	                class="form-control col-4"
+                        	                required/>
+                        	        <label class="col-form-label"> até </label>
+                        	        <input type="number" 
+                                            name="period-end" 
+                                            id="period-end"
+                                            v-model.number="form.period_end"
+                        	                class="form-control col-4"
+                        	                required/>
+                        	    </div>
+                        	</div>
+                        
+                        	<div class="form-group col-4">
+                        	    <label for="ira">IRA:</label>
+                        	    <input type="number" 
+                                        name="ira"
+                                        id="ira"
+                                        v-model.number="form.ira"
+                        	            class="form-control"
+                        	            required>
+                        	</div>
                         </div>
 
                         <div class="form-group">
                             <label for="lattes">URL Lattes:</label>
                             <input type="url" 
-                                    name="latter" 
+                                    name="lattes"
+                                    id="lattes"
+                                    v-model="form.lattes" 
                                     class="form-control"
                                     required>
                         </div>
                     </div>
 
-                    <div class="col">
+                    <div class="col-5">
                         <p><strong>PosComp:</strong></p>
 
                         <div class="form-group">
-                            <label for="pc-year">Ano de Realização:</label>
-                            <input type="number" name="pc-year" class="form-control">
+                            <label for="pc_year">Ano de Realização:</label>
+                            <input type="number" 
+                                    name="pc_year" 
+                                    id="pc_year"
+                                    v-model.number="form.pc_year"
+                                    class="form-control">
                         </div>
+
+                        <p>Notas:</p>
+                        <div class="form-row">
+                            <div class="col-4">
+                            	<label for="pc_mat">Matemática:</label>
+                            	<input type="number"
+                            	        name="pc_mat"
+                            	        v-model.number="form.pc_mat"
+                                        class="form-control"
+                                        @input="add_pc()"
+                            	        required/>
+                            </div>
+                            <div class="col-4">
+                                <label for="pc_prog">Programação:</label>
+                                <input type="number"
+                            	        name="pc_prog"
+                            	        v-model.number="form.pc_prog"
+                                        class="form-control"
+                                        @input="add_pc()"
+                            	        required/>
+                            </div>
+                            <div class="col-4">
+                                <label for="pc_tech">Tecnologia:</label>
+                                <input type="number"
+                            	        name="pc_tech"
+                            	        v-model.number="form.pc_tech"
+                                        class="form-control"
+                                        @input="add_pc()"
+                            	        required/>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pc_total" class="col-form-label"><br>Total: {{ form.pc_total }}</label>
+
+                                <!-- <input type="number" name="pc_total" class="form-control col" v-model.number="pc_total" readonly/> -->
+                            </div>
+                        </div>
+
                     </div>
+
+
                 </div>
             </div>
 
@@ -227,28 +318,89 @@
                 </div>
             </div>
 
+            <!-- DADOS INSCRIÇÃO -->
             <div class="form-section">
-                <h3 class="section-header">Dados de Graduação e Currículo:</h3>
+                <h3 class="section-header">Dados de Inscrição:</h3>
                 
-                <div class="section-content">
-                        <div class="form-row">
-                            <div class="form-group col">
-                                <label for="opt1" class="col-form-label">Opção 1:</label>
-                                <select name="opt1">
-                                    <option v-for="area in areas" :value="area1">{{ area }}</option>
+                <div class="section-content form-row">
+                        <div class="col-5">
+                            <div class="form-group">
+                                <label for="area1">Opção 1:</label>
+                                <select name="area1" 
+                                        id="area1"
+                                        v-model="form.area1"
+                                        class="custom-select">
+                                    <option v-for="area in areas" :value="form.area1">{{ area }}</option>
                                 </select>
                             </div>
 
-                            <div class="form-group col">
-                                <label for="opt2" class="col-form-label">Opção 2:</label>
-                                <select name="opt2">
-                                    <option v-for="area in areas" :value="area2">{{ area }}</option>
+                            <div class="form-group">
+                                <label for="area2">Opção 2:</label>
+                                <select name="area2" 
+                                        id="area2"
+                                        v-model="form.area2"
+                                        class="custom-select">
+                                    <option v-for="area in areas" :value="form.area2">{{ area }}</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Preferência para Entrevista: </label>
+                                <select name="interview_opt" 
+                                        id="interview_opt"
+                                        v-model="form.interview" 
+                                        class="custom-select">
+                                    <option v-for="interview_opt in int_opts" :value="form.interview">{{ interview_opt }}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Contato: </label>
+                                <input type="text" class="form-control">
                             </div>
                         </div>
                 </div>
             </div>
+
+            <div class="form-end">
+                <!-- <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="final-checkbox" id="final-checkbox" value="" required/>
+                    <label for="final-checkbox">Atesto que as informações fornecidas são verdadeiras.</label>
+                </div> -->
+
+                <div class="d-flex flex-row-reverse align-items-end">
+                    <button type="button" class="btn" id="btn-submit">Enviar</button>
+                    <button type="button" class="btn" id="btn-clear">Limpar</button>
+                </div>
+            </div>
         </form>
+
+        <!-- MODAL ADICIONAR INSTITUIÇÃO -->
+        <div class="modal" id="inst-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                         <h5 class="modal-title">Adicionar Instituição de Ensino</h5>
+                         <button type="button" class="close" data-dismiss="modal">
+                             <span>X</span>
+                         </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p>dgsfiugsdfo;glsakjag</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

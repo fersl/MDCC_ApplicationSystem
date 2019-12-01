@@ -37,7 +37,6 @@ new Vue ({
             interview: ''
         },
 
-        
         uf_list: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
         institutions: ['UFC - Fortaleza', 'UFC - Sobral', 'UFC - Russas', 'UFC - Quixadá', 'UECE', 'IFCE', 'UFCA', 'URCA', 'UVA', 'UNILAB', 'Unifor', 'FA7', 'Fanor', 'Fametro', 'Unichristus', 'FFB'],
         courses: {
@@ -53,14 +52,6 @@ new Vue ({
     methods: {
         add_pc() {
             this.form.pc_total = this.form.pc_mat + this.form.pc_prog + this.form.pc_tech
-        },
-
-        modal_inst() {
-
-        },
-
-        modal_course() {
-
         }
     }
 });
