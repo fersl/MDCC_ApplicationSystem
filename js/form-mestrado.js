@@ -1,3 +1,7 @@
+// function institution_modal(){
+//     $("#inst-modal").modal('show');
+// }
+
 new Vue ({
     el: '#app',
 
@@ -56,11 +60,12 @@ new Vue ({
         },
 
         modal_inst() {
+            $("#inst-modal").modal('show');
 
         },
 
         modal_course() {
-
+            $("#course-modal").modal('show');
         }
     }
 });
