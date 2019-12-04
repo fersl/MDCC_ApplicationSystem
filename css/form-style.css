@@ -33,8 +33,14 @@
     font-size: 20px;
 }
 
+.btn:hover {
+    background-color: #2070ad;
+    color: white;
+}
+
 .modal-btn {
     border: none;
     margin: none;
     padding: none;
+    background-color: rgba(0, 0, 0, 0);
 }
