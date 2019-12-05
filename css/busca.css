@@ -78,6 +78,15 @@ table.table {
     padding: 5%;
 }
 
+.info-field {
+    background-color: rgba(200, 200, 200, 0.2);
+    color: black;
+    border-bottom: 1px solid #e6e6e6;
+    border-radius: 7px;
+    padding: 1%;
+    padding-left: 2%;
+}
+
 address {
     display: block;
     font-style: italic;

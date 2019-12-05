@@ -48,13 +48,14 @@ new Vue ({
         course_inst: '',
 
         uf_list: ['-', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
-        institutions: ['UFC - Fortaleza', 'UFC - Sobral', 'UFC - Russas', 'UFC - Quixadá', 'UECE', 'IFCE', 'UFCA', 'URCA', 'UVA', 'UNILAB', 'Unifor', 'FA7', 'Fanor', 'Fametro', 'Unichristus', 'FFB'],
+        institutions: ['UFC - Fortaleza', 'UECE', 'Unifor'],
         courses: {
             'UFC - Fortaleza': ['Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica', 'Engenharia de Telecomunicações', 'Física', 'Matemática', 'Estatística', 'Matemática Industrial'],
             'UECE': ['Ciência da Computação'],
             'Unifor': ['Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica']
         },
-        areas: ['Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
+        areas1: ['', 'Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
+        areas2: ['', 'Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
         int_opts: ['Presencial', 'Skype', 'Telefone', 'Hangout'],
         filters: ['Alfabética (asc.)', 'Alfabética (desc.)', 'Nota Pos-Comp (asc.)', 'Nota Pos-Comp (desc.)', 'IRA (asc.)', 'IRA (desc.)'],
 
@@ -156,6 +157,54 @@ new Vue ({
 
         remove_file: function(index) {
             this.files.splice(index, 1);
+        },
+        submit(){
+
+            let newAluno = {
+                
+                'name':this.name,
+                'date':this.birthdate,
+
+                'gender': this.gender,
+                'id_type': this.id_type,
+                'id_value': this.id_value,
+                'nationality': this.nationality,
+                'email': this.email,
+                'phone': this.phone,
+                'cep': this.cep,
+                'address': this.address,
+                'address_num': this.address_num,
+                'nbhood': this.nbhood,
+                'uf': this.uf,
+                'city': this.city,
+                'country': this.country,
+                'institution': this.institution,
+                'course':this.course,
+                'period_start': this.period_start,
+                'period_end': this.period_end,
+                'ira': this.ira,
+                'lattes': this.lattes,
+
+                'pc_year': this.pc_year,
+                'pc_mat': 0,
+                'pc_prog': 0,
+                'pc_tech': 0,
+                'pc_total': 0,
+
+                'area1': this.area1,
+                'area2': this.area2,
+                'interview': this.interview,
+            
+            };
+
+        
+            axios.post("https://mdcc-2f830.firebaseio.com/alunos.json", newAluno).then(function (r)
+            {window.location.replace("index.html");}
+            )
+            .catch(function (error) {
+                console.log(erro);
+            });
+            
         }
     }
 });

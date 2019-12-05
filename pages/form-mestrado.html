@@ -19,7 +19,7 @@
     <div id="app" class="container">
         <h2>Formulário de Inscrição: Mestrado</h2>
 
-        <form action="" method="POST">
+        <form  action="" method="POST">
             <!-- DADOS PESSOAIS -->
             <div class="container form-section">
                 <h3 class="section-header">Dados Pessoais:</h3>
@@ -33,7 +33,7 @@
                                     name="name"
                                     id="name"
                                     v-model="name" 
-                                    required>
+                                    required/>
                         </div>
 
                         <div class="form-row">
@@ -44,12 +44,12 @@
                                         class="form-control"
                                         id="birthdate"
                                         v-model="birthdate"
-                                        required>
+                                        required/>
                             </div>
     
                             <div class="form-group form-check">
                                 <label for="gender">Gênero:</label><br>
-                                <div class="form-check form-check-inline" id="gender" v-model="gender">
+                                <div class="form-check form-check-inline" id="gender" v-model="gender" required/>
                                     <input type="radio" name="gender" value="male" class="form-check-input" checked>
                                     <label for="gender" class="form-check-label"> Masculino </label>
                                 </div>
@@ -63,7 +63,7 @@
                         <div class="form-group">
                             <label for="">Documento de Identificação:</label>
                             <div class="form-row">
-                                <select name="id-document" class="custom-select col-4" id="id-document" v-model="id_type">
+                                <select name="id-document" class="custom-select col-4" id="id-document" v-model="id_type" required/>
                                     <option value="cpf" selected>CPF</option>
                                     <option value="passport">Passaporte</option>
                                 </select>
@@ -95,7 +95,7 @@
                                     class="form-control"
                                     id="nationality"
                                     v-model="nationality" 
-                                    required>
+                                    required/>
                         </div>
 
                         <div class="form-group">
@@ -105,7 +105,7 @@
                                     class="form-control"
                                     id="email"
                                     v-model="email" 
-                                    required>
+                                    required/>
                         </div>
 
                         <div class="form-group">
@@ -127,7 +127,7 @@
                                         class="form-control"
                                         id="cep"
                                         v-model.number="cep"
-                                        required>
+                                        required/>
                             </div>
 
                             <div class="form-group">
@@ -168,13 +168,13 @@
                                         id="nbhood"
                                         class="form-control"
                                         v-model="nbhood"
-                                        required>
+                                        required/>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-3">
                                     <label for="state">UF:</label>
-                                    <select name="uf" class="custom-select" v-model="uf">
+                                    <select name="uf" class="custom-select" v-model="uf" required/>
                                         <option v-for="uf in uf_list" :value="uf">{{ uf }}</option>
                                     </select>
                                 </div>
@@ -186,7 +186,7 @@
                                         id="city"
                                         class="form-control"
                                         v-model="city"
-                                        required>
+                                        required/>
                                 </div>
                             </div>
 
@@ -197,7 +197,7 @@
                                         id="country"
                                         class="form-control"
                                         v-model="country"
-                                        required>
+                                        required/>
                             </div>
                     </div>
                 </div>
@@ -215,7 +215,8 @@
                             <select name="institution"
                                     id="institution"
                                     v-model="institution"
-                                    class="custom-select"/>
+                                    class="custom-select"
+                                    required/>
                                 <option v-for="institution in institutions" :value="institution">{{ institution }}</option>
                             </select>
                             <button type="button" @click="modal_inst()" class="modal-btn"><small class="form-text text-muted">Não encontra sua instituição?</small></button>
@@ -226,7 +227,8 @@
                             <select name="course" 
                                     class="custom-select"
                                     id="course"
-                                    v-model="course">
+                                    v-model="course"
+                                    required/>
                                 <option v-for="course in courses[institution]" :value="course">{{ course }}</option>
                             </select>
                             <button type="button" @click="modal_course()" class="modal-btn"><small class="form-text text-muted">Não encontra seu curso?</small></button>
@@ -259,7 +261,7 @@
                                         id="ira"
                                         v-model.number="ira"
                         	            class="form-control"
-                        	            required>
+                        	            required/>
                         	</div>
                         </div>
 
@@ -270,7 +272,7 @@
                                     id="lattes"
                                     v-model="lattes" 
                                     class="form-control"
-                                    required>
+                                    required/>
                         </div>
                     </div>
 
@@ -294,8 +296,7 @@
                             	        name="pc_mat"
                             	        v-model.number="pc_mat"
                                         class="form-control"
-                                        @input="add_pc()"
-                            	        required/>
+                                        @input="add_pc()">
                             </div>
                             <div class="col-4">
                                 <label for="pc_prog">Programação:</label>
@@ -303,8 +304,7 @@
                             	        name="pc_prog"
                             	        v-model.number="pc_prog"
                                         class="form-control"
-                                        @input="add_pc()"
-                            	        required/>
+                                        @input="add_pc()">
                             </div>
                             <div class="col-4">
                                 <label for="pc_tech">Tecnologia:</label>
@@ -312,8 +312,7 @@
                             	        name="pc_tech"
                             	        v-model.number="pc_tech"
                                         class="form-control"
-                                        @input="add_pc()"
-                            	        required/>
+                                        @input="add_pc()">
                             </div>
                         </div>
 
@@ -372,8 +371,9 @@
                                 <select name="area1" 
                                         id="area1"
                                         v-model="area1"
-                                        class="custom-select">
-                                    <option v-for="area in areas" :value="area1">{{ area }}</option>
+                                        class="custom-select"
+                                        required/>
+                                    <option v-for="area1 in areas1" :value="area1">{{ area1 }}</option>
                                 </select>
                             </div>
 
@@ -382,8 +382,9 @@
                                 <select name="area2" 
                                         id="area2"
                                         v-model="area2"
-                                        class="custom-select">
-                                    <option v-for="area in areas" :value="area2">{{ area }}</option>
+                                        class="custom-select"
+                                        required/>
+                                    <option v-for="area2 in areas2" :value="area2">{{ area2 }}</option>
                                 </select>
                             </div>
                         </div>
@@ -394,7 +395,8 @@
                                 <select name="interview_opt" 
                                         id="interview_opt"
                                         v-model="interview_opt" 
-                                        class="custom-select">
+                                        class="custom-select"
+                                        required/>
                                     <option v-for="interview_opt in int_opts" :value="interview_opt">{{ interview_opt }}</option>
                                 </select>
                             </div>
@@ -410,36 +412,44 @@
                                         v-model="interview_contact"
                                         name="interview_contact" 
                                         id="interview_contact" 
-                                        class="form-control"/>
+                                        class="form-control"
+                                        required/>
                                 <input type="number" 
                                         v-if="interview_opt === 'Telefone'"
                                         v-model.number="interview_contact"
                                         name="interview_contact" 
                                         id="interview_contact" 
-                                        class="form-control"/>
+                                        class="form-control"
+                                        required/>
                                 <input type="text" 
                                         v-if="interview_opt === 'Hangout'"
                                         v-model="interview_contact"
                                         name="interview_contact" 
                                         id="interview_contact" 
-                                        class="form-control"/>
+                                        class="form-control"
+                                        required/>
                             </div>
                         </div>
                 </div>
             </div>
 
             <div class="form-end">
-                <!-- <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="final-checkbox" id="final-checkbox" value="" required/>
-                    <label for="final-checkbox">Atesto que as informações fornecidas são verdadeiras.</label>
-                </div> -->
-
                 <div class="d-flex flex-row-reverse align-items-end">
-                    <button type="submit" class="btn" id="btn-submit">Enviar</button>
+                    <button type="button" class="btn" id="btn-submit" @click = "submit()" >Enviar</button>
                     <button type="button" class="btn" id="btn-clear" @click="clear_form()">Limpar</button>
                 </div>
             </div>
         </form>
+
+                    <button type="button" class="btn" id="btn-clear" @click="clear_form()">Limpar</button>
+                </div>
+            </div>
+        </form>
+
+
+        <!-- MODAL ADICIONAR INSTITUIÇÃO -->
+        <div class="modal fade" id="inst-modal" role="dialog">
+            <div class="modal-dialog" role="document">
 
 
         <!-- MODAL ADICIONAR INSTITUIÇÃO -->
@@ -508,7 +518,7 @@
         </div>
 
     </div>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
