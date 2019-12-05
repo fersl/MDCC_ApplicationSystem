@@ -11,10 +11,10 @@
     <title>Sistema de Seleção Mestrado/Doutorado</title>
 </head>
 <body>
-    <header>
+    <header class="flex-container">
         <a href="/pages/index.html"><img src="/img/LogoMDCC.gif" alt="logo-mdcc" id="logo"></a>
         <h1 id="title">Sistema de Seleção Mestrado/Doutorado</h1>
-        <!-- adicionar login de professores -->
+        <button class="btn" id="login-prof" v-show="none">Login Professor</button>
     </header>
     <div id="app" class="container">
         <h2>Formulário de Inscrição: Mestrado</h2>
@@ -137,16 +137,28 @@
                                             id="address"
                                             v-model="address"
                                             class="form-control" 
-                                            required>
+                                            required/>
                             </div>
 
-                            <div class="form-group">
-                                <label for="address-num">Complemento:</label>
-                                <input type="text" 
-                                        name="address-num"
-                                        id="address-num"
-                                        v-model="address_num"
-                                        class="form-control">
+                            <div class="form-row">
+                                <div class="form-group col-3">
+                                    <label for="address-num">Nº:</label>
+                                    <input type="number" 
+                                            name="address-num" 
+                                            id="address-num"
+                                            v-model="address_num" 
+                                            class="form-control"
+                                            required/>
+                                </div>
+
+                                <div class="form-group col-9">
+                                    <label for="address-compl">Complemento:</label>
+                                    <input type="text" 
+                                            name="address-compl"
+                                            id="address-compl"
+                                            v-model="address_compl"
+                                            class="form-control">
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -308,8 +320,6 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="pc_total" class="col-form-label"><br>Total: {{ pc_total }}</label>
-
-                                <!-- <input type="number" name="pc_total" class="form-control col" v-model.number="pc_total" readonly/> -->
                             </div>
                         </div>
 
@@ -323,9 +333,32 @@
             <div class="form-section">
                 <h3 class="section-header">Comprovantes:</h3>
     
-                <div class="section-content">
-                        <input type="file" name="file1" class="form-control-file border">
+                <div class="section-content form-row">
+                    <div class="col-4 text-center">
+                        <p>blablabla num sei o que, alguns comprovantes são obrigatórios e tal</p>
+                        <button type="button" class="btn" @click="add_file">Adicionar Arquivo</button>
+                    </div>
+
+                    <div class="col-8">
+                        <template id="file-input"
+                                    v-for="(file, index) in files"
+                                    :key="file.id"
+                                    :title="file.title">
+                            <div class="form-group">
+                                <button v-if="!file.required" type="button" class="btn btn-file" @click="remove_file(index)">&times;</button>
+                                <div class="custom-file"
+                                     :class="{'dismissable-file': !file.required}"/>
+                                    <input type="file" class="custom-file-input"
+                                            :class="{required: file.required}"/>
+                                    <label class="custom-file-label"><small class="text-muted">{{ file.title }}</small></label>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    
                 </div>
+                
             </div>
 
             <!-- DADOS INSCRIÇÃO -->
@@ -402,7 +435,7 @@
                 </div> -->
 
                 <div class="d-flex flex-row-reverse align-items-end">
-                    <button type="button" class="btn" id="btn-submit">Enviar</button>
+                    <button type="submit" class="btn" id="btn-submit">Enviar</button>
                     <button type="button" class="btn" id="btn-clear" @click="clear_form()">Limpar</button>
                 </div>
             </div>
@@ -410,12 +443,12 @@
 
 
         <!-- MODAL ADICIONAR INSTITUIÇÃO -->
-        <div class="modal" id="inst-modal" role="dialog">
+        <div class="modal fade" id="inst-modal" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
 
                     <div class="modal-header">
-                         <h5 class="modal-title">Adicionar Instituição de Ensino</h5>
+                         <h4 class="modal-title">Adicionar Instituição de Ensino</h4>
                     </div>
 
                     <div class="modal-body">
@@ -439,45 +472,43 @@
         </div>
 
         <!-- MODAL ADICIONAR CURSO -->
-        <div class="modal" id="course-modal" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+        <div class="modal fade" id="course-modal" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                         <h4 class="modal-title">Adicionar Curso</h4>
+                    </div>
     
-                        <div class="modal-header">
-                             <h5 class="modal-title">Adicionar Curso</h5>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="course-institution">Instituição de Ensino:</label>
+                            <select name="course-institution"
+                                    id="course-institution"
+                                    v-model="course_inst"
+                                    class="custom-select"/>                                    <option v-for="institution in institutions" :value="course_inst">{{ institution }}</option>
+                            </select>
                         </div>
-    
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="course-institution">Instituição de Ensino:</label>
-                                <select name="course-institution"
-                                        id="course-institution"
-                                        v-model="course_inst"
-                                        class="custom-select"/>
-                                    <option v-for="institution in institutions" :value="course_inst">{{ institution }}</option>
-                                </select>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="new_course">Curso:</label>
-                                <input type="text" 
-                                    name="new-course"
-                                    id="new-course"
-                                    v-model="new_course"
-                                    class="form-control"/>
-                            </div>
+                        <div class="form-group">
+                            <label for="new_course">Curso:</label>
+                            <input type="text" 
+                                name="new-course"
+                                id="new-course"
+                                v-model="new_course"
+                                class="form-control"/>
                         </div>
+                    </div>
     
-                        <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn" v-on:click="courses[course_inst].push(new_course)" data-dismiss="modal">Adicionar</button>
-                        </div>
-    
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn" v-on:click="courses[course_inst].push(new_course)" data-dismiss="modal">Adicionar</button>
                     </div>
                 </div>
             </div>
+        </div>
 
     </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

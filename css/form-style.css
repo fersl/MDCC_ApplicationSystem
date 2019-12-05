@@ -28,19 +28,27 @@
     justify-content: space-between;
 }
 
-.btn {
-    margin-left: 1%;
-    font-size: 20px;
-}
-
-.btn:hover {
-    background-color: #2070ad;
-    color: white;
-}
-
 .modal-btn {
     border: none;
     margin: none;
     padding: none;
     background-color: rgba(0, 0, 0, 0);
+}
+
+.dismissable-file {
+    width: 90%;
+}
+
+.btn-file {
+    padding: 2% 0% 0% 1%;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 25px;
+    font-weight: bolder;
+    color: #489bd9;
+    box-shadow: none;
+}
+
+.btn-file:hover {
+    background-color: rgba(0, 0, 0, 0);
+    color: #2070ad;
 }

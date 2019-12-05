@@ -1,3 +1,38 @@
+var students = [
+    {
+        id: 0,
+        name: 'Fulanito da Silva',
+        uf: 'CE',
+        city: 'Fortaleza',
+        institution: 'Institution A',
+        course: 'Course A',
+        interview: 'Skype',
+        area1: 'Inteligência Artificial',
+        area2: 'Bancos de Dados',
+        pos_comp: 85,
+        ira: 5
+    },
+    {
+        id: 1,
+        name: 'Sicranito dos Santos',
+        uf: 'CE',
+        city: 'Fortaleza',
+        institution: 'Institution A',
+        course: 'Course B',
+        interview: 'Presencial',
+        area1: 'Lógica',
+        area2: 'Algoritmos',
+        pos_comp: 90,
+        ira: 8
+    }
+];
+
+Vue.component( 'table-students', {
+    template: '#table-students'
+
+    // props: ['title']
+});
+
 new Vue ({
     el: '#app',
 
@@ -20,12 +55,33 @@ new Vue ({
             'UECE': ['Ciência da Computação'],
             'Unifor': ['Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica']
         },
+        default_courses: ['', 'Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica', 'Estatística', 'Matemática', 'Matemática Industrial'],
         areas: ['', 'Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
-        int_opts: ['','Presencial', 'Skype', 'Telefone', 'Hangout']
+        // areas2: areas1.splice(areas1.indexOf(area1), 1),
+        int_opts: ['','Presencial', 'Skype', 'Telefone', 'Hangout'],
+
+        students: students
     },
 
     methods: {
+        clear_form() {
+            this.name = '';
+            this.city = '';
+            this.uf = '';
+            this.institution = '';
+            this.interview = '';
+            this.area1 = '';
+            this.area2 = '';
+            this.pc_min = 0;
+            this.pc_max = 100;
+            this.ira_min = 0;
+            this.ira_max = 100;
+        },
 
+        show_info(index) {
+            // document.getElementById("slide-container").style.display = "block";
+            $("#modal-carousel").modal('show');
+        }
     }
 });
 

@@ -1,3 +1,9 @@
+Vue.component( 'file-input', {
+    template: '#file-input',
+
+    props: ['title']
+});
+
 new Vue ({
     el: '#app',
 
@@ -13,6 +19,7 @@ new Vue ({
         cep: '',
         address: '',
         address_num: '',
+        address_compl: '',
         nbhood: '',
         uf: '',
         city: '',
@@ -48,7 +55,38 @@ new Vue ({
             'Unifor': ['Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica']
         },
         areas: ['Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
-        int_opts: ['Presencial', 'Skype', 'Telefone', 'Hangout']
+        int_opts: ['Presencial', 'Skype', 'Telefone', 'Hangout'],
+        filters: ['Alfabética (asc.)', 'Alfabética (desc.)', 'Nota Pos-Comp (asc.)', 'Nota Pos-Comp (desc.)', 'IRA (asc.)', 'IRA (desc.)'],
+
+        filter: '',
+        next_file_id: 5,
+        files: [
+            {
+                id: 0,
+                title: 'Diploma de Graduação',
+                required: true
+            },
+            {
+                id: 1,
+                title: 'Comprovante de Docência',
+                required: true
+            },
+            {
+                id: 2,
+                title: 'Comprovante de IC',
+                required: true
+            },
+            {
+                id: 3,
+                title: 'Comprovante de Monitoria',
+                required: true
+            },
+            {
+                id: 4,
+                title: 'TCC',
+                required: true
+            }
+        ]
         
     },
 
@@ -78,6 +116,7 @@ new Vue ({
             this.cep = '';
             this.address = '';
             this.address_num = '';
+            this.address_compl = '';
             this.nbhood = '';
             this.uf = '';
             this.city = '';
@@ -105,6 +144,18 @@ new Vue ({
         add_inst(){
             this.institutions.push(new_inst);
             this.courses[new_inst] = [];
+        },
+
+        add_file: function () {
+            this.files.push({
+              id: this.next_file_id++,
+              title: 'Adicione arquivo',
+              required: false
+            })
+          },
+
+        remove_file: function(index) {
+            this.files.splice(index, 1);
         }
     }
 });
