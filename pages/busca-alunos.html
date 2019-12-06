@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/busca.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/busca.css">
 
     <title>Sistema de Seleção Mestrado/Doutorado</title>
 </head>
-<body>
+<body">
     <header class="flex-container">
-        <a href="/pages/index.html"><img src="/img/LogoMDCC.gif" alt="logo-mdcc" id="logo"></a>
+        <a href="../pages/index.html"><img src="../img/LogoMDCC.gif" alt="logo-mdcc" id="logo"></a>
         <h1 id="title">Sistema de Seleção Mestrado/Doutorado</h1>
         <button class="btn" id="login-prof" v-show="none">Login Professor</button>
     </header>
@@ -140,7 +140,7 @@
                         </div>
 
                         <div class="d-flex flex-row-reverse align-items-end">
-                            <button type="button" class="btn" id="btn-submit">Enviar</button>
+                            <button type="button" class="btn" id="btn-submit" @click="buscar(name)">Buscar</button>
                             <button type="button" class="btn" id="btn-clear" @click="clear_form()">Limpar</button>
                         </div>
 
@@ -257,7 +257,7 @@
                         </div>
 
                         <div class="d-flex flex-row-reverse align-items-end">
-                            <button type="button" class="btn" id="btn-submit">Enviar</button>
+                            <button type="button" class="btn" id="btn-submit" @click="buscar(name)">Buscar</button>
                             <button type="button" class="btn" id="btn-clear" @click="clear_form()">Limpar</button>
                         </div>
 
@@ -314,40 +314,48 @@
                     <!-- Carousel starts here --> 
                     <div class="carousel-inner"> 
                         <div class="item"
-                             v-for="(student, index)in students"/>
+                             v-for="(student, index) in students"/>
                             <div class="container student-info">
-                                <div class="row">
-                                    <div class="col" id="personal-info">
-                                        <p class="info-field">Nome Completo</p>
-                                        <p class="info-field">Idade</p>
-                                        <p class="info-field"><strong>Nacionalidade: </strong></p>
-                                    </div>
-                                    <div class="col" id="application-info">
-                                        <p>Tipo de Entrevista: </strong> tipo - contato</p>
-                                        <p><strong>Area 1: </strong></p>
-                                        <p><strong>Area 2: </strong></p>
-                                    </div>
+                                <div class="row info-header">
+                                    <h3>Informações do Aluno</h3>
                                 </div>
-                                <div class="row">
-                                    <div class="col" id="contact-info">
-                                        <p><strong>E-mail: </strong></p>
-                                        <p><strong>Telefone: </strong></p>
+                                <div class="info-content">
+                                    <div class="row">
+                                        <div class="col" id="personal-info">
+                                            <p class="info-field">{{student.name}}</p>
+                                            <p class="info-field">{{student.id_type}} - {{student.id_value}}</p>
+                                            <p class="info-field">{{student.institution}}</p>
+                                            <p class="info-field">{{student.course}}</p>
+                                        </div>
+                                        <div class="col" id="application-info">
+                                            <p class="info-field">entrevista: tipo - contato</p>
+                                            <p class="info-field">{{student.area1}}</p>
+                                            <p class="info-field">{{student.area2}}</p>
+                                        </div>
                                     </div>
-                                    <address class="col" id="address-info">
-                                        <p>
-                                            Nome da rua, numero <br>
-                                            complemento <br>
-                                            cidade - UF <br>
-                                            país
-                                        </p>
-                                    </address>
-                                </div>
-                                <div class="row">
-                                    <div class="col" id="cv-info">
-                                        lsf;kngsdkjnf
+                                    <div class="row">
+                                        <div class="col" id="contact-info">
+                                            <p class="info-field"><a href="mailto:">{{student.email}}</a></p>
+                                            <p class="info-field"></p>
+                                        </div>
+                                        <div id="address-info" class="info-field col">
+                                            <address>
+                                                <p>
+                                                    {{student.address}}, {{student.address_num}} - {{student.address_compl}}<br>
+                                                    {{student.nbhood}} <br>
+                                                    {{student.city}} - {{student.uf}} <br>
+                                                    {{student.country}}
+                                                </p>
+                                            </address>
+                                        </div>
                                     </div>
-                                    <div class="col" id="files">
-                                        nsdvlfkjbnsgdjfkgn
+                                    <div class="row">
+                                        <div class="col" id="cv-info">
+                                            lsf;kngsdkjnf
+                                        </div>
+                                        <div class="col info-field" id="files">
+                                            "link com nome do comprovante que linka para pdf"
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -369,11 +377,12 @@
         </template>
         
     </div>
-
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-      <script src="/js/busca.js"></script>
+      <script src="../js/busca.js"></script>
 </body>
 </html>

@@ -160,7 +160,7 @@ new Vue ({
         },
         submit(){
 
-            let newAluno = {
+            var newAluno = {
                 
                 'name':this.name,
                 'date':this.birthdate,
@@ -174,6 +174,7 @@ new Vue ({
                 'cep': this.cep,
                 'address': this.address,
                 'address_num': this.address_num,
+                'address_compl': this.address_compl,
                 'nbhood': this.nbhood,
                 'uf': this.uf,
                 'city': this.city,

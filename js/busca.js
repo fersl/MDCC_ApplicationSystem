@@ -1,31 +1,3 @@
-var students = [
-    {
-        id: 0,
-        name: 'Fulanito da Silva',
-        uf: 'CE',
-        city: 'Fortaleza',
-        institution: 'Institution A',
-        course: 'Course A',
-        interview: 'Skype',
-        area1: 'Inteligência Artificial',
-        area2: 'Bancos de Dados',
-        pos_comp: 85,
-        ira: 5
-    },
-    {
-        id: 1,
-        name: 'Sicranito dos Santos',
-        uf: 'CE',
-        city: 'Fortaleza',
-        institution: 'Institution A',
-        course: 'Course B',
-        interview: 'Presencial',
-        area1: 'Lógica',
-        area2: 'Algoritmos',
-        pos_comp: 90,
-        ira: 8
-    }
-];
 
 Vue.component( 'table-students', {
     template: '#table-students'
@@ -35,6 +7,8 @@ Vue.component( 'table-students', {
 
 new Vue ({
     el: '#app',
+
+    
 
     data: {
         name: '',
@@ -60,9 +34,12 @@ new Vue ({
         // areas2: areas1.splice(areas1.indexOf(area1), 1),
         int_opts: ['','Presencial', 'Skype', 'Telefone', 'Hangout'],
 
-        students: students
+        students:[]
     },
 
+    mounted(){
+        this.getalunos();
+    },
     methods: {
         clear_form() {
             this.name = '';
@@ -81,8 +58,136 @@ new Vue ({
         show_info(index) {
             // document.getElementById("slide-container").style.display = "block";
             $("#modal-carousel").modal('show');
+        },
+
+
+
+        buscar(nome){
+
+            
+            alunos=[];
+            axios.get("https://mdcc-2f830.firebaseio.com/alunos.json").then(function (r)
+            {           
+                
+                
+                
+
+                Object.keys(r.data).forEach((key) => {
+                    
+                    if (r.data[key].name.startsWith(nome,0)|| r.data[key].name.startsWith(nome.toUpperCase(),0)|| r.data[key].name.startsWith(nome.toLowerCase(),0)){
+                        alunos.push(r.data[key]);
+                    }
+                    
+                });
+                
+
+                }
+            )
+            .catch(function (error) {
+                console.log(error);
+            });
+            this.students=[];
+            this.students= alunos;
+
+
+        },
+
+        getalunos(){
+            
+
+            var aluno={
+                
+                    name:"",
+                    date:"",
+                    gender:"",
+                    id_type: "",
+                    id_value: "",
+                    nationality:"",
+                    email: "",
+                    phone: "",
+                    cep: "",
+                    address: "",
+                    address_num: "",
+                    nbhood: "",
+                    uf: "",
+                    city: "",
+                    country: "",
+                    institution: "",
+                    course: "",
+                    period_start: "",
+                    period_end: "",
+                    ira: "",
+                    lattes: "",
+    
+                    pc_year: "",
+                    pc_mat: 0,
+                    pc_prog: 0,
+                    pc_tech: 0,
+                    pc_total:0,
+    
+                    area1: "",
+                    area2: "",
+                    interview: ""
+                
+                
+            };
+
+
+            var newAluno = {
+                
+                'name':this.name,
+                'date':this.birthdate,
+
+                'gender': this.gender,
+                'id_type': this.id_type,
+                'id_value': this.id_value,
+                'nationality': this.nationality,
+                'email': this.email,
+                'phone': this.phone,
+                'cep': this.cep,
+                'address': this.address,
+                'address_num': this.address_num,
+                'nbhood': this.nbhood,
+                'uf': this.uf,
+                'city': this.city,
+                'country': this.country,
+                'institution': this.institution,
+                'course':this.course,
+                'period_start': this.period_start,
+                'period_end': this.period_end,
+                'ira': this.ira,
+                'lattes': this.lattes,
+
+                'pc_year': this.pc_year,
+                'pc_mat': 0,
+                'pc_prog': 0,
+                'pc_tech': 0,
+                'pc_total': 0,
+
+                'area1': this.area1,
+                'area2': this.area2,
+                'interview': this.interview,
+            
+            };
+            
+
+            alunos=[];
+            axios.get("https://mdcc-2f830.firebaseio.com/alunos.json").then(function (r)
+            {           
+                
+            
+                Object.keys(r.data).forEach((key) => {
+                    this.alunos.push(r.data[key]);
+                });
+
+
+                }
+            )
+            .catch(function (error) {
+                console.log(error);
+            });
+
+            this.students= alunos;
         }
     }
 });
-
-  

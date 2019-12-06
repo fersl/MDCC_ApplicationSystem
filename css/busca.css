@@ -75,7 +75,19 @@ table.table {
 }
 
 .student-info {
-    padding: 5%;
+    /* padding: 5%; */
+}
+
+.info-header {
+    background-color: #489bd9;
+    color: white;
+    border-radius: 7px 7px 0 0;
+    box-shadow: 0px 2px 5px rgba(50, 50, 50, 0.2);
+    padding: 2% 3%;
+}
+
+.info-content {
+    padding: 5% 3% 3% 3%;
 }
 
 .info-field {
@@ -94,5 +106,5 @@ address {
 
 div.row {
     border: none;
-    border-bottom: 2px solid #e6e6e6;
+    /* border-bottom: 2px solid #e6e6e6; */
 }
