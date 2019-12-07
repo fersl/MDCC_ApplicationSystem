@@ -58,8 +58,7 @@ new Vue ({
 
         show_info(index) {
             // document.getElementById("slide-container").style.display = "block";
-            $("#modal-carousel").modal('show');
-            items = document.getElementsByClassName("item");
+            items = document.getElementsByClassName("carousel-item");
 
             for(aux=0; aux<items.length; aux++) {
                 items[aux].classList.remove("active");
@@ -68,6 +67,11 @@ new Vue ({
             i = document.getElementById(index);
             console.log(i);
             i.classList.add("active");
+
+            $("#modal-carousel").modal('show');
+            // $('.carousel').carousel({
+            //     interval: false;
+            //   });
         },
 
 
@@ -137,7 +141,8 @@ new Vue ({
     
                     area1: "",
                     area2: "",
-                    interview: ""
+                    interview_opt: "",
+                    interview_contact: ""
                 
                 
             };
@@ -176,7 +181,8 @@ new Vue ({
 
                 'area1': this.area1,
                 'area2': this.area2,
-                'interview': this.interview,
+                'interview_opt': this.interview_opt,
+                'interview_contact': this.interview_contact
             
             };
             
