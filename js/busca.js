@@ -11,9 +11,12 @@ new Vue ({
     
 
     data: {
+
+        
         name: '',
         city: '',
         uf: '',
+        course:"",
         institution: '',
         interview: '',
         area1: '',
@@ -34,13 +37,25 @@ new Vue ({
         // areas2: areas1.splice(areas1.indexOf(area1), 1),
         int_opts: ['','Presencial', 'Skype', 'Telefone', 'Hangout'],
 
-        students:[]
+        students:[],
+       
     },
 
     mounted(){
+
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(this.currentUser);
+        if (this.currentUser ==null){
+            window.location.href="./index.html";
+        }
         this.getalunos();
     },
     methods: {
+
+        logout(){
+            localStorage.removeItem('currentUser');
+            window.location.href="./index.html";
+        },
         clear_form() {
             this.name = '';
             this.city = '';
@@ -62,22 +77,27 @@ new Vue ({
 
 
 
-        buscar(name, uf, city, institution, interview, area1, area2, pc_min, pc_max, ira_min, ira_max){
+        buscar(){
 
             searchdata ={
-                name : name,
-                uf: uf,
-                institution: institution,
-                
-                city: city,
-                area1: area1,
-                area2 :area2
+                name : this.name,
+                uf: this.uf,
+                institution: this.institution,
+                course: this.course,
+                city: this.city,
+                area1: this.area1,
+                area2 :this.area2,
+                interview_opt : this.interview,
+              
              
             }
 
-
-            console.log(this.area1);
-            console.log(this.area2);
+            var pc_min = this.pc_min;
+            var pc_max = this.pc_max;
+            var ira_max= this.ira_max;
+            var ira_min = this.ira_min;
+            console.log(searchdata.course + "teste");
+    
             
             alunos=[];
             axios.get("https://mdcc-2f830.firebaseio.com/alunos.json").then(function (r)
@@ -104,11 +124,13 @@ new Vue ({
                         }
                     }
 
-                    console.log(ira_min);
-                    console.log (r.data[key]['ira']>ira_min);
+                    
+                    if(r.data[key]['ira']< ira_min || r.data[key]['ira']>ira_max){
+                        
+                        boolean= false;
+                    } 
 
-
-                    if(r.data[key]['ira']<ira_min || r.data[key]['ira']>ira_max){
+                    if(r.data[key]['pc_total']< pc_min || r.data[key]['pc_total']>pc_max){
                         
                         boolean= false;
                     } 
@@ -137,81 +159,6 @@ new Vue ({
         getalunos(){
             
 
-            var aluno={
-                
-                    name:"",
-                    date:"",
-                    gender:"",
-                    id_type: "",
-                    id_value: "",
-                    nationality:"",
-                    email: "",
-                    phone: "",
-                    cep: "",
-                    address: "",
-                    address_num: "",
-                    nbhood: "",
-                    uf: "",
-                    city: "",
-                    country: "",
-                    institution: "",
-                    course: "",
-                    period_start: "",
-                    period_end: "",
-                    ira: "",
-                    lattes: "",
-    
-                    pc_year: "",
-                    pc_mat: 0,
-                    pc_prog: 0,
-                    pc_tech: 0,
-                    pc_total:0,
-    
-                    area1: "",
-                    area2: "",
-                    interview: ""
-                
-                
-            };
-
-
-            var newAluno = {
-                
-                'name':this.name,
-                'date':this.birthdate,
-
-                'gender': this.gender,
-                'id_type': this.id_type,
-                'id_value': this.id_value,
-                'nationality': this.nationality,
-                'email': this.email,
-                'phone': this.phone,
-                'cep': this.cep,
-                'address': this.address,
-                'address_num': this.address_num,
-                'nbhood': this.nbhood,
-                'uf': this.uf,
-                'city': this.city,
-                'country': this.country,
-                'institution': this.institution,
-                'course':this.course,
-                'period_start': this.period_start,
-                'period_end': this.period_end,
-                'ira': this.ira,
-                'lattes': this.lattes,
-
-                'pc_year': this.pc_year,
-                'pc_mat': 0,
-                'pc_prog': 0,
-                'pc_tech': 0,
-                'pc_total': 0,
-
-                'area1': this.area1,
-                'area2': this.area2,
-                'interview': this.interview,
-            
-            };
-            
 
             alunos=[];
             axios.get("https://mdcc-2f830.firebaseio.com/alunos.json").then(function (r)

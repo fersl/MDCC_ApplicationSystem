@@ -33,10 +33,10 @@ new Vue ({
         lattes: '',
 
         pc_year: '',
-        pc_mat: 0,
-        pc_prog: 0,
-        pc_tech: 0,
-        pc_total: 0,
+        pc_mat: "",
+        pc_prog: "",
+        pc_tech: "",
+        pc_total: "",
 
         area1: '',
         area2: '',
@@ -47,7 +47,20 @@ new Vue ({
         new_course: '',
         course_inst: '',
 
-        next_file_id: 6,
+        uf_list: ['-', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
+        institutions: ['UFC - Fortaleza', 'UECE', 'Unifor'],
+        courses: {
+            'UFC - Fortaleza': ['Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica', 'Engenharia de Telecomunicações', 'Física', 'Matemática', 'Estatística', 'Matemática Industrial'],
+            'UECE': ['Ciência da Computação'],
+            'Unifor': ['Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica']
+        },
+        areas1: ['', 'Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
+        areas2: ['', 'Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
+        int_opts: ['Presencial', 'Skype', 'Telefone', 'Hangout'],
+        filters: ['Alfabética (asc.)', 'Alfabética (desc.)', 'Nota Pos-Comp (asc.)', 'Nota Pos-Comp (desc.)', 'IRA (asc.)', 'IRA (desc.)'],
+
+        filter: '',
+        next_file_id: 5,
         files: [
             {
                 id: 0,
@@ -56,46 +69,31 @@ new Vue ({
             },
             {
                 id: 1,
-                title: 'Tese de Mestrado',
-                required: true
-            },
-            {
-                id: 2,
                 title: 'Comprovante de Docência',
                 required: true
             },
             {
-                id: 3,
+                id: 2,
                 title: 'Comprovante de IC',
                 required: true
             },
             {
-                id: 4,
+                id: 3,
                 title: 'Comprovante de Monitoria',
                 required: true
             },
             {
-                id: 5,
+                id: 4,
                 title: 'TCC',
                 required: true
             }
-        ],
-
-        uf_list: ['-', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
-        institutions: ['UFC - Fortaleza', 'UFC - Sobral', 'UFC - Russas', 'UFC - Quixadá', 'UECE', 'IFCE', 'UFCA', 'URCA', 'UVA', 'UNILAB', 'Unifor', 'FA7', 'Fanor', 'Fametro', 'Unichristus', 'FFB'],
-        courses: {
-            'UFC - Fortaleza': ['Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica', 'Engenharia de Telecomunicações', 'Física', 'Matemática', 'Estatística', 'Matemática Industrial'],
-            'UECE': ['Ciência da Computação'],
-            'Unifor': ['Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica']
-        },
-        areas: ['Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
-        int_opts: ['Presencial', 'Skype', 'Telefone', 'Hangout']
+        ]
         
     },
 
     methods: {
         add_pc() {
-            this.pc_total = this.pc_mat + this.pc_prog + this.pc_tech;
+            this.pc_total = parseInt(this.pc_mat ,10) + parseInt(this.pc_prog ,10)+parseInt(this.pc_tech ,10);
         },
 
         modal_inst() {
@@ -159,6 +157,58 @@ new Vue ({
 
         remove_file: function(index) {
             this.files.splice(index, 1);
+        },
+        submit(){
+
+            var newAluno = {
+                
+                'name':this.name,
+                'date':this.birthdate,
+
+                'gender': this.gender,
+                'id_type': this.id_type,
+                'id_value': this.id_value,
+                'nationality': this.nationality,
+                'email': this.email,
+                'phone': this.phone,
+                'cep': this.cep,
+                'address': this.address,
+                'address_num': this.address_num,
+                'address_compl': this.address_compl,
+                'nbhood': this.nbhood,
+                'uf': this.uf,
+                'city': this.city,
+                'country': this.country,
+                'institution': this.institution,
+                'course':this.course,
+                'period_start': this.period_start,
+                'period_end': this.period_end,
+                'ira': this.ira,
+                'lattes': this.lattes,
+
+                'pc_year': this.pc_year,
+                'pc_mat': this.pc_mat,
+                'pc_prog': this.pc_prog,
+                'pc_tech': this.pc_tech,
+                'pc_total': this.pc_total,
+
+                'area1': this.area1,
+                'area2': this.area2,
+                'interview_opt': this.interview_opt,
+                'interview_contact': this.interview_opt,
+
+            
+            
+            };
+
+        
+            axios.post("https://mdcc-2f830.firebaseio.com/alunos.json", newAluno).then(function (r)
+            {window.location.replace("index.html");}
+            )
+            .catch(function (error) {
+                console.log(erro);
+            });
+            
         }
     }
 });

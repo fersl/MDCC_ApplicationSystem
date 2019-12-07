@@ -33,10 +33,10 @@ new Vue ({
         lattes: '',
 
         pc_year: '',
-        pc_mat: 0,
-        pc_prog: 0,
-        pc_tech: 0,
-        pc_total: 0,
+        pc_mat: "",
+        pc_prog: "",
+        pc_tech: "",
+        pc_total: "",
 
         area1: '',
         area2: '',
@@ -93,7 +93,7 @@ new Vue ({
 
     methods: {
         add_pc() {
-            this.pc_total = this.pc_mat + this.pc_prog + this.pc_tech;
+            this.pc_total = parseInt(this.pc_mat ,10) + parseInt(this.pc_prog ,10)+parseInt(this.pc_tech ,10);
         },
 
         modal_inst() {
@@ -187,14 +187,17 @@ new Vue ({
                 'lattes': this.lattes,
 
                 'pc_year': this.pc_year,
-                'pc_mat': 0,
-                'pc_prog': 0,
-                'pc_tech': 0,
-                'pc_total': 0,
+                'pc_mat': this.pc_mat,
+                'pc_prog': this.pc_prog,
+                'pc_tech': this.pc_tech,
+                'pc_total': this.pc_total,
 
                 'area1': this.area1,
                 'area2': this.area2,
-                'interview': this.interview,
+                'interview_opt': this.interview_opt,
+                'interview_contact': this.interview_opt,
+
+            
             
             };
 

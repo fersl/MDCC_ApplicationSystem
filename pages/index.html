@@ -44,26 +44,8 @@
 
                 <div class="modal-body">
                     <form action="" method="POST">
-                        <div class="form-group row">
-                            <label for="l-mail" class="col-form-label col-2">Login:</label>
-                            <input type="email" 
-                                    name="l-mail" 
-                                    id="l-mail"
-                                    v-model="login_mail"
-                                    class="form-control col-9"
-                                    required/>
-                        </div>
-                        <br>
-                        <div class="form-group row">
-                            <label for="l-pwd" class="col-form-label col-2">Senha:</label>
-                            <input type="email" 
-                                    name="l-pwd" 
-                                    id="l-pwd"
-                                    v-model="login_pwd" 
-                                    class="form-control col-9"
-                                    required/>
-                        </div>
-                        <br>
+                
+                        
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">login</span>
@@ -106,62 +88,13 @@
                     <span class="text-muted"><small>Ainda não é registrado?</small></span>
                     <button type="button" class="btn" data-dismiss="modal" data-toggle="modal" data-target="#register-modal">Registrar-se</button>
                     <!-- <button type="submit" class="btn" data-dismiss="modal">Login</button> -->
-                    <a href="../pages/busca-alunos.html" class="btn">Login</a>
+                    <button class="btn" @click= "login()">Login</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL REGISTRO DE PROFESSOR -->
-    <div class="modal fade" id="register-modal" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Registro de Professor</h4>
-                </div>
-
-                <div class="modal-body">
-                    <form action="" method="POST">
-                        <div class="form-group">
-                            <label for="r-mail">E-mail:</label>
-                            <input type="email" 
-                                    name="r-mail" 
-                                    id="r-mail"
-                                    v-model="mail" 
-                                    class="form-control"
-                                    required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="pwd">Senha:</label>
-                            <input type="password" 
-                                    name="r-pwd" 
-                                    id="r-pwd"
-                                    v-model="password" 
-                                    class="form-control"
-                                    required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="pwd-confirm">Confirme sua senha:</label>
-                            <input type="password" 
-                                    name="r-pwd2" 
-                                    id="r-pwd2"
-                                    v-model="password2" 
-                                    class="form-control"
-                                    required/>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn" data-dismiss="modal">Registrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

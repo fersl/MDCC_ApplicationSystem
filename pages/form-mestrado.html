@@ -19,7 +19,7 @@
     <div id="app" class="container">
         <h2>Formulário de Inscrição: Mestrado</h2>
 
-        <form  action="" method="POST">
+        <form  v-on:submit.prevent="onSubmit" @submit="submit" method="POST">
             <!-- DADOS PESSOAIS -->
             <div class="container form-section">
                 <h3 class="section-header">Dados Pessoais:</h3>
@@ -293,7 +293,7 @@
                             	<label for="pc_mat">Matemática:</label>
                             	<input type="number"
                             	        name="pc_mat"
-                            	        v-model.number="pc_mat"
+                            	        v-model="pc_mat"
                                         class="form-control"
                                         @input="add_pc()">
                             </div>
@@ -301,7 +301,7 @@
                                 <label for="pc_prog">Programação:</label>
                                 <input type="number"
                             	        name="pc_prog"
-                            	        v-model.number="pc_prog"
+                            	        v-model="pc_prog"
                                         class="form-control"
                                         @input="add_pc()">
                             </div>
@@ -309,7 +309,7 @@
                                 <label for="pc_tech">Tecnologia:</label>
                                 <input type="number"
                             	        name="pc_tech"
-                            	        v-model.number="pc_tech"
+                            	        v-model="pc_tech"
                                         class="form-control"
                                         @input="add_pc()">
                             </div>
@@ -415,7 +415,7 @@
                                         required/>
                                 <input type="number" 
                                         v-if="interview_opt === 'Telefone'"
-                                        v-model.number="interview_contact"
+                                        v-model="interview_contact"
                                         name="interview_contact" 
                                         id="interview_contact" 
                                         class="form-control"
@@ -434,7 +434,7 @@
 
             <div class="form-end">
                 <div class="d-flex flex-row-reverse align-items-end">
-                    <button type="button" class="btn" id="btn-submit" @click = "submit()" >Enviar</button>
+                    <button type="submit" class="btn" id="btn-submit"  >Enviar</button>
                     <button type="button" class="btn" id="btn-clear" @click="clear_form()">Limpar</button>
                 </div>
             </div>
