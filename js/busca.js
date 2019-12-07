@@ -41,6 +41,7 @@ new Vue ({
         this.getalunos();
     },
     methods: {
+
         clear_form() {
             this.name = '';
             this.city = '';
@@ -58,6 +59,15 @@ new Vue ({
         show_info(index) {
             // document.getElementById("slide-container").style.display = "block";
             $("#modal-carousel").modal('show');
+            items = document.getElementsByClassName("item");
+
+            for(aux=0; aux<items.length; aux++) {
+                items[aux].classList.remove("active");
+            }
+
+            i = document.getElementById(index);
+            console.log(i);
+            i.classList.add("active");
         },
 
 
@@ -191,3 +201,4 @@ new Vue ({
         }
     }
 });
+
