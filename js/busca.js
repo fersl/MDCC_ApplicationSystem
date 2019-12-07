@@ -62,23 +62,65 @@ new Vue ({
 
 
 
-        buscar(nome){
+        buscar(name, uf, city, institution, interview, area1, area2, pc_min, pc_max, ira_min, ira_max){
 
+            searchdata ={
+                name : name,
+                uf: uf,
+                institution: institution,
+                
+                city: city,
+                area1: area1,
+                area2 :area2
+             
+            }
+
+
+            console.log(this.area1);
+            console.log(this.area2);
             
             alunos=[];
             axios.get("https://mdcc-2f830.firebaseio.com/alunos.json").then(function (r)
             {           
                 
                 
+                Object.keys(r.data).forEach((key) => {
+
+                    var boolean = true;
+                    for (i in searchdata){
+                        
+                        if (searchdata[i]!='undefined' && searchdata[i]!=null && searchdata[i]!=''){
+
+                            console.log(i)
+                         
+                            console.log(r.data[key][i].toUpperCase());
+ 
+                            if(!r.data[key][i].toUpperCase().includes(searchdata[i].toUpperCase())){
+                                boolean = false;
+                            }
+
+                            
+
+                        }
+                    }
+
+                    console.log(ira_min);
+                    console.log (r.data[key]['ira']>ira_min);
+
+
+                    if(r.data[key]['ira']<ira_min || r.data[key]['ira']>ira_max){
+                        
+                        boolean= false;
+                    } 
+
+                    
+                    if (boolean==true){
+                        this.alunos.push(r.data[key]);
+                    }
+                });
                 
 
-                Object.keys(r.data).forEach((key) => {
-                    
-                    if (r.data[key].name.startsWith(nome,0)|| r.data[key].name.startsWith(nome.toUpperCase(),0)|| r.data[key].name.startsWith(nome.toLowerCase(),0)){
-                        alunos.push(r.data[key]);
-                    }
-                    
-                });
+      
                 
 
                 }
