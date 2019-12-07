@@ -324,7 +324,7 @@
                                         </div>
                                         <div class="info-content">
                                            <div class="row">
-                                            <div class="col">
+                                            <div class="col-6">
                                                 <!-- INFORMAÇÕES PESSOAIS -->
                                                 <div class="info-field">
                                                     <div class="field-label">Nome: </div>
@@ -337,7 +337,7 @@
                                                 </div>
     
                                                 <div class="info-field">
-                                                    <div class="field-label"> {{student.id_type}} </div>
+                                                    <div class="field-label"> {{student.id_type}}: </div>
                                                     <div class="field-content"> {{student.id_value}} </div>
                                                 </div>
     
@@ -353,11 +353,11 @@
                                                 </div>
                                                 
                                                 <div class="row">
-                                                    <div class="info-field">
+                                                    <div class="info-field col-6">
                                                         <div class="field-label">IRA:</div>
                                                         <div class="field-content"> {{student.ira}} </div>
                                                     </div>
-                                                    <div class="info-field">
+                                                    <div class="info-field col-6">
                                                         <div class="field-label">PosComp:</div>
                                                         <div v-if="!student.pc_total === 0" class="field-content"> {{student.pc_total}} </div>
                                                         <div v-else class="field-content">N/A</div>
@@ -370,7 +370,7 @@
                                                 </div>
                                             </div>
     
-                                            <div class="col">
+                                            <div class="col-6">
                                                 <!-- CONTATO -->
                                                 <div class="info-field">
                                                     <div class="field-label">Preferência para Entrevista: </div>
@@ -392,9 +392,17 @@
                                                     <div class="field-content"> {{student.phone}} </div>
                                                 </div>
     
-                                                <div class="field-field">
+                                                <div class="info-field">
                                                     <div class="field-label">Endereço: </div>
                                                     <div class="field-content">
+                                                        <address>
+                                                            {{student.address}}, {{student.address_num}}<br>
+                                                            <!-- <span v-if="!student.address_compl === ''"> - {{student.address_compl}} </span> -->
+                                                            {{student.nbhood}} <br>
+                                                            {{student.city}} - {{student.uf}}, {{student.country}} <br>
+                                                            {{student.cep}} <br>
+                                                            <!-- {{student.country}} -->
+                                                        </address>
                                                     </div>
                                                 </div>
                                             </div>

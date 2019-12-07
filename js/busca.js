@@ -72,7 +72,20 @@ new Vue ({
 
         show_info(index) {
             // document.getElementById("slide-container").style.display = "block";
+            items = document.getElementsByClassName("carousel-item");
+
+            for(aux=0; aux<items.length; aux++) {
+                items[aux].classList.remove("active");
+            }
+
+            i = document.getElementById(index);
+            console.log(i);
+            i.classList.add("active");
+
             $("#modal-carousel").modal('show');
+            // $('.carousel').carousel({
+            //     interval: false;
+            //   });
         },
 
 
