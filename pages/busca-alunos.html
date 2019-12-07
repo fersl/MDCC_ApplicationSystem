@@ -307,79 +307,124 @@
             </nav>
         </template>
 
-        <!-- MODAL CAROUSEL -->
-        <template id="student-info">
-            <div class="modal fade" id="modal-carousel" tabindex="-1" role="dialog" aria-labelledby="ModalCarouselLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div id="carousel-modal-demo" class="carousel slide" data-ride="carousel">
-          
-                    <!-- Carousel starts here --> 
-                    <div class="carousel-inner"> 
-                        <div class="item"
-                             v-for="(student, index) in students"/>
-                            <div class="container student-info">
-                                <div class="row info-header">
-                                    <h3>Informações do Aluno</h3>
-                                </div>
-                                <div class="info-content">
-                                    <div class="row">
-                                        <div class="col" id="personal-info">
-                                            <p class="info-field">{{student.name}}</p>
-                                            <p class="info-field">{{student.id_type}} - {{student.id_value}}</p>
-                                            <p class="info-field">{{student.institution}}</p>
-                                            <p class="info-field">{{student.course}}</p>
-                                        </div>
-                                        <div class="col" id="application-info">
-                                            <p class="info-field">entrevista: tipo - contato</p>
-                                            <p class="info-field">{{student.area1}}</p>
-                                            <p class="info-field">{{student.area2}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col" id="contact-info">
-                                            <p class="info-field"><a href="mailto:">{{student.email}}</a></p>
-                                            <p class="info-field"></p>
-                                        </div>
-                                        <div id="address-info" class="info-field col">
-                                            <address>
-                                                <p>
-                                                    {{student.address}}, {{student.address_num}} - {{student.address_compl}}<br>
-                                                    {{student.nbhood}} <br>
-                                                    {{student.city}} - {{student.uf}} <br>
-                                                    {{student.country}}
-                                                </p>
-                                            </address>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col" id="cv-info">
-                                            lsf;kngsdkjnf
-                                        </div>
-                                        <div class="col info-field" id="files">
-                                            "link com nome do comprovante que linka para pdf"
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
+        <!-- INICIO MODAL -->
+        <div class="modal" tabindex="-1" role="dialog" id="modal-carousel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
     
-                    <!-- Next / Previous controls here -->
-                    <a class="left carousel-control" href="#carousel-modal-demo" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-modal-demo" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
-            
-                </div>
+                    <div class="modal-body">
+                        <div id="info-carousel" class="carousel" data-ride="carousel" data-interval="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item"
+                                    v-for="(student, index) in students"
+                                    v-bind:id="index">
+                                    <div class="container student-info">
+                                        <div class="row info-header">
+                                            <h3>Informações do Aluno</h3>
+                                        </div>
+                                        <div class="info-content">
+                                           <div class="row">
+                                            <div class="col">
+                                                <!-- INFORMAÇÕES PESSOAIS -->
+                                                <div class="info-field">
+                                                    <div class="field-label">Nome: </div>
+                                                    <div class="field-content"> {{student.name}} </div>
+                                                </div>
+    
+                                                <div class="info-field">
+                                                    <div class="field-label">Idade: </div>
+                                                    <div class="field-content"> placeholder </div>
+                                                </div>
+    
+                                                <div class="info-field">
+                                                    <div class="field-label"> {{student.id_type}} </div>
+                                                    <div class="field-content"> {{student.id_value}} </div>
+                                                </div>
+    
+                                                <!-- CURRÍCULO -->
+                                                <div class="info-field">
+                                                    <div class="field-label">Instituição: </div>
+                                                    <div class="field-content"> {{student.institution}} </div>
+                                                </div>
+    
+                                                <div class="info-field">
+                                                    <div class="field-label">Curso: </div>
+                                                    <div class="field-content"> {{student.course}} </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="info-field">
+                                                        <div class="field-label">IRA:</div>
+                                                        <div class="field-content"> {{student.ira}} </div>
+                                                    </div>
+                                                    <div class="info-field">
+                                                        <div class="field-label">PosComp:</div>
+                                                        <div v-if="!student.pc_total === 0" class="field-content"> {{student.pc_total}} </div>
+                                                        <div v-else class="field-content">N/A</div>
+                                                    </div>
+                                                </div>
+    
+                                                <div class="info-field">
+                                                    <div class="field-label">Lattes:</div>
+                                                    <div class="field-content"><a :href="student.lattes"> {{student.lattes}} </a></div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="col">
+                                                <!-- CONTATO -->
+                                                <div class="info-field">
+                                                    <div class="field-label">Preferência para Entrevista: </div>
+                                                    <div class="field-content"> {{student.interview_opt}} </div>
+                                                </div>
+    
+                                                <div class="info-field">
+                                                    <div class="field-label">Contato: </div>
+                                                    <div class="field-content"> {{student.interview_contact}} </div>
+                                                </div>
+    
+                                                <div class="info-field">
+                                                    <div class="field-label">E-mail: </div>
+                                                    <div class="field-content"><a :href="'mailto:' + student.email"> {{student.email}} </a></div>
+                                                </div>
+    
+                                                <div class="info-field">
+                                                    <div class="field-label">Telefone: </div>
+                                                    <div class="field-content"> {{student.phone}} </div>
+                                                </div>
+    
+                                                <div class="field-field">
+                                                    <div class="field-label">Endereço: </div>
+                                                    <div class="field-content">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           </div>
+    
+                                           <!-- FILES -->
+                                           <div class="row">
+                                                G
+                                           </div>
+                                            
+                                        </div>
+                                    </div>                                  
+                                </div>  
+                            </div>
+    
+                            <a class="carousel-control-prev" href="#info-carousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                            <a class="carousel-control-next" href="#info-carousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Próximo</span>
+                            </a>
+                        </div>
+                    </div>
+    
+                  </div>
                 </div>
             </div>
-            </div>
-
-       
-        </template>
+            <!-- FIM MODAL -->
         
     </div>
     
