@@ -92,6 +92,14 @@ table.table {
     padding: 5% 3% 3% 3%;
 }
 
+.info-field {
+    margin: 1%;
+}
+
+.field-label {
+
+}
+
 .field-content {
     background-color: rgba(200, 200, 200, 0.2);
     color: #333;

@@ -14,7 +14,8 @@
     <header class="flex-container">
         <a href="../pages/index.html"><img src="../img/LogoMDCC.gif" alt="logo-mdcc" id="logo"></a>
         <h1 id="title">Sistema de Seleção Mestrado/Doutorado</h1>
-        <button class="btn" id="login-prof" v-show="none">Login Professor</button>
+        <!-- <button class="btn" id="login-prof" v-show="none">Login Professor</button> -->
+        <!-- <button type="button" class="btn" @click="logout()">Logout</button> -->
     </header>
 
     <div class="container" id="app">
@@ -104,21 +105,21 @@
                             <div class="form-row">
                                 <div class="form-group col">
                                     <label for="area1">Área 1:</label>
-                                    <select name="area1" 
+                                    <select name="area1" @change="prevent_duplicate()"
                                             id="area1" 
                                             class="custom-select"
                                             v-model="area1">
-                                        <option v-for="area in areas" :value="area">{{ area }}</option>
+                                        <option v-for="area1 in areas1" :value="area1">{{ area1 }}</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group col">
                                     <label for="area2">Área 2:</label>
                                     <select name="area2" 
-                                            id="area1" 
+                                            id="area2" 
                                             class="custom-select"
                                             v-model="area2">
-                                        <option v-for="area in areas" :value="area">{{ area }}</option>
+                                        <option v-for="area2 in areas2" :value="area2">{{ area2 }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -202,7 +203,7 @@
                                         id="course"
                                         v-model="course">
                                     <option v-for="course in courses[institution]" :value="course" v-if="!institution === ''">{{ course }}</option>
-                                    <option v-for="course in default_courses" :value="course" v-if="institution === ''">{{ course }}</option>
+                                    <option v-for="course in default_courses" :value="course" v-else>{{ course }}</option>
                                 </select>
                             </div>
                         </div>
@@ -221,25 +222,25 @@
                             <div class="form-row">
                                 <div class="form-group col">
                                     <label for="area1">Área 1:</label>
-                                    <select name="area1" 
+                                    <select name="area1" @change="prevent_duplicate(this.value)"
                                             id="area1" 
                                             class="custom-select"
                                             v-model="area1">
-                                        <option v-for="area in areas" :value="area">{{ area }}</option>
+                                        <option v-for="area1 in areas1" :value="area1">{{ area1 }}</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group col">
                                     <label for="area2">Área 2:</label>
                                     <select name="area2" 
-                                            id="area1" 
+                                            id="area2" 
                                             class="custom-select"
                                             v-model="area2">
-                                        <option v-for="area in areas" :value="area">{{ area }}</option>
+                                        <option v-for="area2 in areas2" :value="area2">{{ area2 }}</option>
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <br/>
                             
                             <div class="form-group form-inline">

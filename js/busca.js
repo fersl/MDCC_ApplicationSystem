@@ -33,8 +33,8 @@ new Vue ({
             'Unifor': ['Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica']
         },
         default_courses: ['', 'Ciência da Computação', 'Engenharia da Computação', 'Engenharia Elétrica', 'Estatística', 'Matemática', 'Matemática Industrial'],
-        areas: ['', 'Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
-        // areas2: areas1.splice(areas1.indexOf(area1), 1),
+        areas1: ['', 'Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
+        areas2: [],
         int_opts: ['','Presencial', 'Skype', 'Telefone', 'Hangout'],
 
         students:[],
@@ -190,6 +190,18 @@ new Vue ({
             });
 
             this.students= alunos;
+        },
+
+
+        prevent_duplicate() {
+         
+            this.areas2 = this.areas1
+            for (i in this.areas2){
+                if (i == area1){
+                    this.areas2.splice(i, 1);
+                }
+             }
         }
+
     }
 });
