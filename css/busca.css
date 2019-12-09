@@ -93,7 +93,7 @@ table.table {
 }
 
 .info-field {
-    margin: 1%;
+    margin-bottom: 5%;
 }
 
 .field-label {
@@ -101,6 +101,7 @@ table.table {
 }
 
 .field-content {
+    overflow-wrap: break-word;
     background-color: rgba(200, 200, 200, 0.2);
     color: #333;
     border-bottom: 1px solid #e6e6e6;

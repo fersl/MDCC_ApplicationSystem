@@ -158,6 +158,7 @@ new Vue ({
         remove_file: function(index) {
             this.files.splice(index, 1);
         },
+        
         submit(){
 
             var newAluno = {
@@ -209,6 +210,15 @@ new Vue ({
                 console.log(erro);
             });
             
+        },
+
+        prevent_duplicate() {     
+            this.areas2= [];  
+            for (i in this.areas1){
+                if (this.areas1[i]!=this.area1){
+                    this.areas2.push(this.areas1[i]);
+                }
+            }
         }
     }
 });

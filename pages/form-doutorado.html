@@ -371,6 +371,7 @@
                                         id="area1"
                                         v-model="area1"
                                         class="custom-select"
+                                        @change="prevent_duplicate()"
                                         required/>
                                     <option v-for="area1 in areas1" :value="area1">{{ area1 }}</option>
                                 </select>
@@ -444,11 +445,6 @@
         <!-- MODAL ADICIONAR INSTITUIÇÃO -->
         <div class="modal fade" id="inst-modal" role="dialog">
             <div class="modal-dialog" role="document">
-
-
-        <!-- MODAL ADICIONAR INSTITUIÇÃO -->
-        <div class="modal fade" id="inst-modal" role="dialog">
-            <div class="modal-dialog" role="document">
                 <div class="modal-content">
 
                     <div class="modal-header">
@@ -489,7 +485,8 @@
                             <select name="course-institution"
                                     id="course-institution"
                                     v-model="course_inst"
-                                    class="custom-select"/>                                    <option v-for="institution in institutions" :value="course_inst">{{ institution }}</option>
+                                    class="custom-select"/>                                    
+                                <option v-for="institution in institutions" :value="course_inst">{{ institution }}</option>
                             </select>
                         </div>
 

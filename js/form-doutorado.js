@@ -57,10 +57,8 @@ new Vue ({
         areas1: ['', 'Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
         areas2: ['', 'Engenharia de Software', 'Inteligência Artificial', 'Lógica', 'Algoritmos', 'Bancos de Dados', 'Redes', 'Computação Gráfica'],
         int_opts: ['Presencial', 'Skype', 'Telefone', 'Hangout'],
-        filters: ['Alfabética (asc.)', 'Alfabética (desc.)', 'Nota Pos-Comp (asc.)', 'Nota Pos-Comp (desc.)', 'IRA (asc.)', 'IRA (desc.)'],
 
-        filter: '',
-        next_file_id: 5,
+        next_file_id: 6,
         files: [
             {
                 id: 0,
@@ -69,21 +67,26 @@ new Vue ({
             },
             {
                 id: 1,
-                title: 'Comprovante de Docência',
+                title: 'Tese de Mestrado',
                 required: true
             },
             {
                 id: 2,
-                title: 'Comprovante de IC',
+                title: 'Comprovante de Docência',
                 required: true
             },
             {
                 id: 3,
-                title: 'Comprovante de Monitoria',
+                title: 'Comprovante de IC',
                 required: true
             },
             {
                 id: 4,
+                title: 'Comprovante de Monitoria',
+                required: true
+            },
+            {
+                id: 5,
                 title: 'TCC',
                 required: true
             }
@@ -158,6 +161,7 @@ new Vue ({
         remove_file: function(index) {
             this.files.splice(index, 1);
         },
+
         submit(){
 
             var newAluno = {
@@ -209,6 +213,15 @@ new Vue ({
                 console.log(erro);
             });
             
+        },
+
+        prevent_duplicate() {     
+            this.areas2= [];  
+            for (i in this.areas1){
+                if (this.areas1[i]!=this.area1){
+                    this.areas2.push(this.areas1[i]);
+                }
+            }
         }
     }
 });
